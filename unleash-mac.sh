@@ -31,12 +31,18 @@ sudo launchctl disable system/com.apple.diagnosticd 2>/dev/null || true
 sudo defaults write /Library/Preferences/com.apple.mDNSResponder.plist NoMulticastAdvertisements -bool YES
 sudo killall -HUP mDNSResponder 2>/dev/null || true
 
-echo "[3/5] Installing persistent boot daemon..."
+echo "[3/5] Installing persistent boot daemon (Radio Isolation & Dynamic VRAM)..."
 PLIST_PATH="/Library/LaunchDaemons/com.custom.unleash.plist"
+
+# Dynamically calculate an optimal high-memory VRAM ceiling if machine has 96GB+ RAM, otherwise keep native pool
 if [ "$TOTAL_RAM_GB" -ge 90 ]; then
-    VRAM_CMD="/usr/sbin/sysctl -w iogpu.wired_limit_mb=90112; /usr/sbin/sysctl -w iogpu.wired_lwm_mb=86016"
+    # Generic calculation: ~90% of total RAM converted to MB for heavy local AI workloads
+    CALC_VRAM_MB=$((TOTAL_RAM_GB * 1024 * 90 / 100))
+    VRAM_CMD="/usr/sbin/sysctl -w iogpu.wired_limit_mb=$CALC_VRAM_MB;"
+    echo "      -> High-memory workstation detected: Allocating optimized AI VRAM pool."
 else
     VRAM_CMD="true"
+    echo "      -> Standard workstation detected: Using native dynamic memory pool."
 fi
 
 sudo tee "$PLIST_PATH" > /dev/null <<PLIST
