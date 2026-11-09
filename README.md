@@ -1,16 +1,45 @@
-# macos-unleash
+<p align="center">
+  <img src="assets/banner.svg" alt="macos-unleash: Apple Silicon workstation setup" width="100%">
+</p>
 
-A Bash script for configuring an Apple Silicon Mac for desktop use and local AI workloads. It adjusts interface preferences, selected background services, power settings, wireless interfaces, and the GPU wired memory limit, then installs a software collection through Homebrew.
+<p align="center">
+  <a href="#requirements"><img src="https://img.shields.io/badge/macOS-Apple_Silicon-172c35?style=flat-square&amp;logo=apple&amp;logoColor=white" alt="macOS on Apple Silicon"></a>
+  <a href="unleash-mac.sh"><img src="https://img.shields.io/badge/shell-Bash-172c35?style=flat-square&amp;logo=gnubash&amp;logoColor=white" alt="Written in Bash"></a>
+  <a href="Brewfile"><img src="https://img.shields.io/badge/packages-Homebrew-172c35?style=flat-square&amp;logo=homebrew&amp;logoColor=white" alt="Packages managed with Homebrew"></a>
+  <a href="docs/AUDIT.md"><img src="https://img.shields.io/badge/status-early_development-c4a66a?style=flat-square" alt="Status: early development"></a>
+</p>
 
-Performance depends on the macOS version, hardware, and workload. This project does not include benchmarks or guarantee that these settings improve responsiveness.
+<p align="center">
+  Configure desktop preferences, system settings, and a development software collection from one Bash script.
+</p>
 
-## Before you run it
+<p align="center">
+  <a href="#get-started">Get started</a> &nbsp; / &nbsp;
+  <a href="#how-it-works">How it works</a> &nbsp; / &nbsp;
+  <a href="#software-collection">Software</a> &nbsp; / &nbsp;
+  <a href="docs/TROUBLESHOOTING.md">Troubleshooting</a> &nbsp; / &nbsp;
+  <a href="docs/AUDIT.md">Audit</a>
+</p>
 
-The script makes system changes using administrator access. It restarts Dock and Finder, changes Bonjour advertising, brings down wireless peer interfaces, and installs a launch daemon that runs at boot. These changes can affect AirDrop, device discovery, sleep behavior, and memory available to other applications.
+## At a glance
 
-Read [what changes](#what-changes) and the [recovery guide](docs/TROUBLESHOOTING.md#recovery) first. The script has no dry run, automatic backup, or complete uninstall command. A failed run can leave earlier changes applied.
+| Desktop | System | Software |
+| --- | --- | --- |
+| Dock, Finder, animations, keyboard repeat. | Services, wireless, GPU memory, power. | CLI tools, runtimes, editors, local AI. |
 
-## Requirements
+All settings are visible in [`unleash-mac.sh`](unleash-mac.sh). The software list lives in [`Brewfile`](Brewfile).
+
+> [!IMPORTANT]
+> This script changes system settings with administrator access. It can affect AirDrop, device discovery, sleep behavior, and memory available to applications. It has no dry run or automatic rollback. Read [what changes](#what-changes) and the [recovery guide](docs/TROUBLESHOOTING.md#recovery) before running it.
+
+## Get started
+
+### Requirements
+
+You need an Apple Silicon Mac running macOS, Bash, administrator access, Apple Command Line Tools, and an internet connection.
+
+<details>
+<summary>Full requirements and compatibility notes</summary>
 
 | Requirement | Details |
 | --- | --- |
@@ -23,7 +52,7 @@ Read [what changes](#what-changes) and the [recovery guide](docs/TROUBLESHOOTING
 
 No project API key is required to run the bootstrap. Installed applications may need their own accounts or configuration later. There is no published macOS compatibility matrix; individual preferences and `sysctl` keys can vary by release.
 
-## Setup
+</details>
 
 ### 1. Prepare your Mac
 
@@ -61,7 +90,15 @@ Run from an interactive terminal and stay available for the administrator passwo
 
 The script stops on many command failures, but deliberately ignores some service errors. The final message does not prove that every setting took effect. Use the checks below.
 
-## Workflow
+## How it works
+
+![Five setup stages: interface preferences, services, boot daemon, power settings, and software installation](assets/workflow.svg)
+
+Runs in order: interface preferences, services, boot daemon, power settings, then software installation.
+
+<details>
+<summary>View the detailed execution flow</summary>
+
 
 ```mermaid
 flowchart TD
@@ -80,7 +117,12 @@ flowchart TD
     L -->|No| N[Leave the GPU wired limit unchanged]
 ```
 
+</details>
+
 ## What changes
+
+<details>
+<summary>View every system change and its limitations</summary>
 
 | Area | Current behavior |
 | --- | --- |
@@ -95,9 +137,14 @@ flowchart TD
 
 The GPU setting uses an OS-specific key. A large wired memory limit can reduce memory available to the rest of the system under load. There is no workload measurement or memory pressure check in the script.
 
-### Installed software
+</details>
 
-`Brewfile` is the source of truth for the collection.
+## Software collection
+
+The collection covers a complete development workstation. Review [`Brewfile`](Brewfile) and remove entries you do not want before installation.
+
+<details>
+<summary>Browse the included tools and applications</summary>
 
 | Group | Software |
 | --- | --- |
@@ -108,6 +155,8 @@ The GPU setting uses an OS-specific key. A large wired memory limit can reduce m
 | Terminals | Ghostty, iTerm2 |
 | Browsers | Chrome, Firefox, Brave, Zen |
 | Utilities | Tailscale, Raycast, BetterDisplay, Syncthing, VLC, AppCleaner |
+
+</details>
 
 Installing an application does not configure it. The script does not download AI models, authenticate applications, or explicitly start Ollama or other application services.
 
@@ -145,12 +194,17 @@ macos-unleash/
 ├── README.md                 Project overview and setup
 ├── unleash-mac.sh            System configuration and installation
 ├── Brewfile                  Homebrew software collection
+├── assets/
+│   ├── banner.svg            Project banner
+│   └── workflow.svg          Setup overview
 └── docs/
     ├── TROUBLESHOOTING.md    Diagnosis and partial recovery
     └── AUDIT.md              Reviewed limitations and follow-up work
 ```
 
 ## Development and project status
+
+Performance depends on the macOS version, hardware, and workload. This project does not include benchmarks or guarantee better responsiveness.
 
 The repository currently has no automated runtime tests or CI workflow. A portable syntax check is:
 
@@ -162,5 +216,7 @@ git diff --check
 These checks can run on Linux, but they do not validate macOS behavior. Runtime testing needs a suitable Mac and a way to restore its previous configuration.
 
 The [project audit](docs/AUDIT.md) records current reliability gaps and recommended work. When proposing a change, describe the macOS version, how it was checked, and how to reverse it. Remove serial numbers, hostnames, account names, and other personal details from shared diagnostics.
+
+For a problem with installation or recovery, start with the [troubleshooting guide](docs/TROUBLESHOOTING.md). If it does not resolve the issue, [open an issue](https://github.com/rod97-1/macos-unleash/issues) with the macOS version, failing stage, and relevant error text.
 
 No license file is currently included. The maintainer needs to choose a license before contributors can rely on explicit reuse terms.

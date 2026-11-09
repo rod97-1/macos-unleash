@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="title desc">
+  <title id="title">macos-unleash</title>
+  <desc id="desc">Apple Silicon workstation setup. A dark banner with a desktop monitor, chip, and terminal illustration.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1">
+      <stop stop-color="#101b27"/>
+      <stop offset="1" stop-color="#172c35"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#8ad8c4" stroke-opacity=".06"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="360" rx="18" fill="url(#bg)"/>
+  <rect width="1280" height="360" rx="18" fill="url(#grid)"/>
+  <path d="M0 72H6V288H0" fill="#81e6c2"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+    <text x="64" y="88" fill="#81e6c2" font-size="14" font-weight="600" letter-spacing="3">BASH / MACOS / HOMEBREW</text>
+    <text x="60" y="174" fill="#f2f7fa" font-size="76" font-weight="700" letter-spacing="-3">macos-unleash</text>
+    <text x="64" y="222" fill="#b4c6d1" font-size="25">Apple Silicon workstation setup</text>
+    <path d="M64 255H116" stroke="#81e6c2" stroke-width="3"/>
+    <text x="64" y="292" fill="#8babb8" font-size="16">Desktop preferences. System settings. Software.</text>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="874" y="68" width="304" height="197" rx="12" fill="#102029" stroke="#4d727d" stroke-width="2"/>
+    <path d="M874 231H1178" stroke="#4d727d" stroke-width="2"/>
+    <path d="M1026 265V291M983 292H1069" stroke="#78939e" stroke-width="4"/>
+    <circle cx="1026" cy="248" r="3" fill="#81e6c2"/>
+    <rect x="897" y="88" width="258" height="121" rx="6" fill="#162f39" stroke="#2c4c58"/>
+    <circle cx="912" cy="100" r="2.5" fill="#8aadb9"/>
+    <circle cx="922" cy="100" r="2.5" fill="#8aadb9"/>
+    <circle cx="932" cy="100" r="2.5" fill="#8aadb9"/>
+    <path d="M914 126L923 133L914 140M934 141H958" stroke="#81e6c2" stroke-width="3"/>
+    <path d="M914 164H1018M914 179H984M1033 164H1084M999 179H1051" stroke="#537a87" stroke-width="4"/>
+    <rect x="1112" y="185" width="88" height="88" rx="13" fill="#81e6c2" stroke="#102029" stroke-width="6"/>
+    <rect x="1132" y="205" width="48" height="48" rx="5" stroke="#17363a" stroke-width="2"/>
+    <path d="M1147 211V247M1165 211V247M1138 220H1174M1138 238H1174" stroke="#17363a" stroke-width="1.5"/>
+    <path d="M1138 175V184M1156 175V184M1174 175V184M1138 274V283M1156 274V283M1174 274V283M1102 211H1111M1102 229H1111M1102 247H1111M1201 211H1210M1201 229H1210M1201 247H1210" stroke="#81e6c2" stroke-width="3"/>
+  </g>
+</svg>

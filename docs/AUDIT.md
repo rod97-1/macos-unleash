@@ -8,11 +8,11 @@ Scope: the current Bash script, Brewfile, README, and public repository descript
 
 The main release gaps are platform checks, reliable failure reporting, backups, and repeatable validation. Documentation now describes these limits. The script has not been changed as part of this documentation review.
 
-The current tracked files contain no personal machine serial number, hostname, account path, or fixed personal hardware configuration. The public About description names chip models and a fixed GPU memory amount. Replace it with:
+The current project files contain no personal machine serial number, hostname, account path, or fixed personal hardware configuration. The public About description now uses this generic wording:
 
 > Apple Silicon macOS workstation bootstrap for desktop preferences, power settings, wireless interfaces, GPU memory limits, and Homebrew software installation.
 
-The public description is repository metadata, separate from the README. Changing files does not change that field. Historical commits were not rewritten or assessed for personal information.
+The public description is repository metadata, separate from the README, and was verified on GitHub. Historical commits were not rewritten or assessed for personal information.
 
 ## Findings
 
