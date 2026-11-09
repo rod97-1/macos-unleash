@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="244" viewBox="0 0 1200 244" role="img" aria-labelledby="title desc">
-  <title id="title">The five setup stages</title>
-  <desc id="desc">After hardware detection and administrator access: interface preferences, services and Bonjour, boot daemon, power settings, then software installation. Verification is manual.</desc>
+  <title id="title">The workstation workflow</title>
+  <desc id="desc">Inspect prerequisites, plan selected tools, apply explicitly, inspect status, and optionally restore recorded settings.</desc>
   <rect x="1" y="1" width="1198" height="242" rx="14" fill="#111e29" stroke="#304653"/>
   <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
-    <text x="32" y="37" fill="#97b2bf" font-size="13" font-weight="600" letter-spacing="2">THE FIVE SETUP STAGES</text>
-    <text x="32" y="62" fill="#bdd0d9" font-size="15">Hardware detection and administrator access happen first.</text>
+    <text x="32" y="37" fill="#97b2bf" font-size="13" font-weight="600" letter-spacing="2">THE WORKSTATION WORKFLOW</text>
+    <text x="32" y="62" fill="#bdd0d9" font-size="15">Select your tools. System tuning is a separate choice.</text>
     <path d="M145 103H1055" stroke="#345563" stroke-width="2"/>
     <g fill="#81e6c2" stroke="#111e29" stroke-width="7">
       <circle cx="130" cy="103" r="19"/><circle cx="365" cy="103" r="19"/><circle cx="600" cy="103" r="19"/><circle cx="835" cy="103" r="19"/><circle cx="1070" cy="103" r="19"/>
@@ -13,11 +13,11 @@
       <text x="130" y="108">1</text><text x="365" y="108">2</text><text x="600" y="108">3</text><text x="835" y="108">4</text><text x="1070" y="108">5</text>
     </g>
     <g fill="#eef5f8" font-size="19" font-weight="600" text-anchor="middle">
-      <text x="130" y="153">Interface</text><text x="365" y="153">Services</text><text x="600" y="153">Boot daemon</text><text x="835" y="153">Power</text><text x="1070" y="153">Software</text>
+      <text x="130" y="153">Doctor</text><text x="365" y="153">Plan</text><text x="600" y="153">Apply</text><text x="835" y="153">Status</text><text x="1070" y="153">Restore</text>
     </g>
     <g fill="#a1bac7" font-size="14" text-anchor="middle">
-      <text x="130" y="180">Dock, Finder, keyboard</text><text x="365" y="180">Analytics and Bonjour</text><text x="600" y="180">Wireless and GPU limit</text><text x="835" y="180">Sleep and power profiles</text><text x="1070" y="180">Homebrew and npm</text>
+      <text x="130" y="180">Inspect prerequisites</text><text x="365" y="180">Preview exact actions</text><text x="600" y="180">Install and record changes</text><text x="835" y="180">Check the selected result</text><text x="1070" y="180">Recover recorded settings</text>
     </g>
-    <text x="32" y="220" fill="#8eacba" font-size="13">Inspect the result after installation. The script does not verify every change automatically.</text>
+    <text x="32" y="220" fill="#8eacba" font-size="13">Restore is optional. It covers recorded settings, not installed packages.</text>
   </g>
 </svg>

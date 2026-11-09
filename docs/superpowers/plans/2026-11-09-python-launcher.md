@@ -1,6 +1,6 @@
 # Python launcher implementation plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Ship one reliable workstation launcher for Ubuntu, Debian, Fedora, and Apple Silicon macOS, with Windows deferred.
 
@@ -28,10 +28,10 @@ Unsupported and malformed platform identity must fail before mutation (Task 1). 
 
 **Interfaces:** `Platform(name, manager, arch)`; `detect_platform(system=None, machine=None, release=None) -> Platform`; `load_catalog() -> dict[str, Tool]`; `select_tools(catalog, profiles, include, exclude) -> list[Tool]`. `Tool` holds ID, profiles, platform package arrays, cask flag, executable check, and manual-install guidance.
 
-- [ ] Add tests for supported distributions, unsupported derivative IDs, macOS arm64, Windows rejection, malformed identity, profiles, unknown selections, exclusions, malicious identifiers, and Brewfile/catalog parity.
-- [ ] Run `python3 -m unittest discover -s tests -v`; observe the missing implementation failures.
-- [ ] Implement strict detection and validated catalog selection. Core provides portable CLI utilities; dev adds supported distro runtimes. Optional Mac-only or external tools are represented honestly. A `full` profile reproduces the Brewfile set.
-- [ ] Run the full suite and commit the foundation.
+- [x] Add tests for supported distributions, unsupported derivative IDs, macOS arm64, Windows rejection, malformed identity, profiles, unknown selections, exclusions, malicious identifiers, and Brewfile/catalog parity.
+- [x] Run `python3 -m unittest discover -s tests -v`; observe the missing implementation failures.
+- [x] Implement strict detection and validated catalog selection. Core provides portable CLI utilities; dev adds supported distro runtimes. Optional Mac-only or external tools are represented honestly. A `full` profile reproduces the Brewfile set.
+- [x] Run the full suite and commit the foundation.
 
 ### Task 2: Package planning and installation
 
@@ -39,9 +39,9 @@ Unsupported and malformed platform identity must fail before mutation (Task 1). 
 
 **Interfaces:** `Runner.run(argv, check=True, live=False) -> CompletedProcess`; `CommandError` preserves a usable exit code. `PackageManager(platform, runner)` provides `installed(tool)`, `commands(tools)`, and `install(tools)`; all commands are argument arrays.
 
-- [ ] Add failing tests for APT, DNF, formula/cask commands; already installed packages; external tools; elevation boundaries; unavailable package preflight; and installer failures preventing later commands.
-- [ ] Observe failures, then implement package inspection and planning without privilege or metadata refresh. Apply refreshes package metadata when needed, validates selected identifiers, and installs only missing packages. No full system upgrades or unsigned package options.
-- [ ] Verify real subprocess failure status and argument boundaries using temporary executables, run all tests, and commit.
+- [x] Add failing tests for APT, DNF, formula/cask commands; already installed packages; external tools; elevation boundaries; unavailable package preflight; and installer failures preventing later commands.
+- [x] Observe failures, then implement package inspection and planning without privilege or metadata refresh. Apply refreshes package metadata when needed, validates selected identifiers, and installs only missing packages. No full system upgrades or unsigned package options.
+- [x] Verify real subprocess failure status and argument boundaries using temporary executables, run all tests, and commit.
 
 ### Task 3: Explicit settings and recovery
 
@@ -49,11 +49,11 @@ Unsupported and malformed platform identity must fail before mutation (Task 1). 
 
 **Interfaces:** `Setting(id, label, read, write, desired)` uses typed JSON-compatible snapshots. `build_settings(platform, runner, groups, gpu_limit_mb) -> list[Setting]`. `StateStore(path, platform)` provides locked `apply(settings)` and `restore(settings_by_id, run_id)` operations and reports a run ID/results.
 
-- [ ] Write failing tests for GNOME animations and available power profiles; typed macOS preferences, power settings, service overrides, wireless flags, bounded GPU values; unsupported capabilities; and legacy daemon migration refusal.
-- [ ] Implement explicit settings with capability checks. Mac power changes target supported charger settings; battery behavior stays unchanged. Do not create a persistent daemon. Linux settings require a real user desktop session and never tune the container host implicitly.
-- [ ] Write failing tests for original/absent values, pending changes on failure, repeat application, conflicts, per-run recovery, path traversal, wrong platform/user, invalid JSON/schema, symlinks, file modes, and locking.
-- [ ] Implement atomic restrictive state files with no executable command data. Recovery derives commands from trusted setting definitions and validates all selected records before mutation. Recover only managed setting values, never installed packages.
-- [ ] Run the full suite and commit settings and recovery.
+- [x] Write failing tests for GNOME animations and available power profiles; typed macOS preferences, power settings, service overrides, wireless flags, bounded GPU values; unsupported capabilities; and legacy daemon migration refusal.
+- [x] Implement explicit settings with capability checks. Mac power changes target supported charger settings; battery behavior stays unchanged. Do not create a persistent daemon. Linux settings require a real user desktop session and never tune the container host implicitly.
+- [x] Write failing tests for original/absent values, pending changes on failure, repeat application, conflicts, per-run recovery, path traversal, wrong platform/user, invalid JSON/schema, symlinks, file modes, and locking.
+- [x] Implement atomic restrictive state files with no executable command data. Recovery derives commands from trusted setting definitions and validates all selected records before mutation. Recover only managed setting values, never installed packages.
+- [x] Run the full suite and commit settings and recovery.
 
 ### Task 4: CLI, compatibility, and native Linux verification
 
@@ -61,11 +61,11 @@ Unsupported and malformed platform identity must fail before mutation (Task 1). 
 
 **Interfaces:** `main(argv=None) -> int` implements help, doctor, plan, apply, status, restore. Shared selectors: repeatable `--profile`, `--tool`, `--exclude`; tuning via repeatable `--tune` and optional `--gpu-limit-mb`; state via `--state-dir`; restore uses `--run` or latest. Entry point checks Python version before importing launcher modules.
 
-- [ ] Add failing CLI tests for mutation-free help/doctor/plan/status, unsupported OS, unknown options, selectors, required-component failures, failure summaries, explicit apply, and wrapper paths containing spaces.
-- [ ] Implement orchestration, default core selection, capability diagnostics, nonzero missing-component status, migration guidance, and no-state read-only paths. The wrapper checks Darwin/arm64/Python and delegates without sudo.
-- [ ] Add CI for Python versions on Ubuntu/macOS and package integration on Ubuntu 24.04, Debian 13, and Fedora 44. Use trusted official images and preserve signature verification.
-- [ ] Run real doctor/plan/status in Debian. Run core and dev package apply/status twice in disposable containers, checking the second run is already configured. Preserve TLS trust/proxy configuration in cloud runs. Report container or native desktop limitations precisely.
-- [ ] Run all tests and commit.
+- [x] Add failing CLI tests for mutation-free help/doctor/plan/status, unsupported OS, unknown options, selectors, required-component failures, failure summaries, explicit apply, and wrapper paths containing spaces.
+- [x] Implement orchestration, default core selection, capability diagnostics, nonzero missing-component status, migration guidance, and no-state read-only paths. The wrapper checks Darwin/arm64/Python and delegates without sudo.
+- [x] Add CI for Python versions on Ubuntu/macOS and package integration on Ubuntu 24.04, Debian 13, and Fedora 44. Use trusted official images and preserve signature verification.
+- [x] Run real doctor/plan/status in Debian. Run core and dev package apply/status twice in disposable containers, checking the second run is already configured. Preserve TLS trust/proxy configuration in cloud runs. Report container or native desktop limitations precisely.
+- [x] Run all tests and commit.
 
 ### Task 5: Platform documentation, graphics, and final review
 
