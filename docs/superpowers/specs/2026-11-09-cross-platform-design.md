@@ -1,6 +1,6 @@
 # Workstation launcher design
 
-Status: proposed for review.
+Status: approved by the maintainer on November 9, 2026.
 
 ## Intent
 
