@@ -433,11 +433,12 @@
       ],
       "dnf": [
         "firefox"
-      ]
+      ],
+      "ubuntu": []
     },
-    "command": "",
+    "command": "firefox",
     "cask": true,
-    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+    "guidance": "On Ubuntu, install Firefox separately through your preferred official method, or exclude firefox. The launcher does not implicitly install Snap. https://support.mozilla.org/products/firefox"
   },
   {
     "id": "brave-browser",

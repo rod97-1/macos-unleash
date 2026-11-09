@@ -8,12 +8,13 @@ class FakeRunner:
         self.calls = []
 
     def which(self, name):
-        return '/usr/bin/' + name if name in self.available else None
+        return "/usr/bin/" + name if name in self.available else None
 
     def run(self, argv, check=True, live=False):
         from unleashlib.runner import CommandError
+
         self.calls.append(list(argv))
-        code, output = self.responses.get(tuple(argv), (0, ''))
+        code, output = self.responses.get(tuple(argv), (0, ""))
         if check and code:
             raise CommandError(argv, code, output)
-        return subprocess.CompletedProcess(argv, code, output, '')
+        return subprocess.CompletedProcess(argv, code, output, "")
