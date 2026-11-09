@@ -1,0 +1,561 @@
+[
+  {
+    "id": "git",
+    "profiles": [
+      "full",
+      "core"
+    ],
+    "packages": {
+      "brew": [
+        "git"
+      ],
+      "apt": [
+        "git"
+      ],
+      "dnf": [
+        "git"
+      ]
+    },
+    "command": "git",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "gh",
+    "profiles": [
+      "full",
+      "dev"
+    ],
+    "packages": {
+      "brew": [
+        "gh"
+      ],
+      "apt": [
+        "gh"
+      ],
+      "dnf": [
+        "gh"
+      ]
+    },
+    "command": "gh",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "curl",
+    "profiles": [
+      "full",
+      "core"
+    ],
+    "packages": {
+      "brew": [
+        "curl"
+      ],
+      "apt": [
+        "curl"
+      ],
+      "dnf": [
+        "curl"
+      ]
+    },
+    "command": "curl",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "wget",
+    "profiles": [
+      "full",
+      "core"
+    ],
+    "packages": {
+      "brew": [
+        "wget"
+      ],
+      "apt": [
+        "wget"
+      ],
+      "dnf": [
+        "wget"
+      ]
+    },
+    "command": "wget",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "btop",
+    "profiles": [
+      "full",
+      "core"
+    ],
+    "packages": {
+      "brew": [
+        "btop"
+      ],
+      "apt": [
+        "btop"
+      ],
+      "dnf": [
+        "btop"
+      ]
+    },
+    "command": "btop",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "htop",
+    "profiles": [
+      "full",
+      "core"
+    ],
+    "packages": {
+      "brew": [
+        "htop"
+      ],
+      "apt": [
+        "htop"
+      ],
+      "dnf": [
+        "htop"
+      ]
+    },
+    "command": "htop",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "tmux",
+    "profiles": [
+      "full",
+      "core"
+    ],
+    "packages": {
+      "brew": [
+        "tmux"
+      ],
+      "apt": [
+        "tmux"
+      ],
+      "dnf": [
+        "tmux"
+      ]
+    },
+    "command": "tmux",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "jq",
+    "profiles": [
+      "full",
+      "core"
+    ],
+    "packages": {
+      "brew": [
+        "jq"
+      ],
+      "apt": [
+        "jq"
+      ],
+      "dnf": [
+        "jq"
+      ]
+    },
+    "command": "jq",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "fzf",
+    "profiles": [
+      "full",
+      "core"
+    ],
+    "packages": {
+      "brew": [
+        "fzf"
+      ],
+      "apt": [
+        "fzf"
+      ],
+      "dnf": [
+        "fzf"
+      ]
+    },
+    "command": "fzf",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "ripgrep",
+    "profiles": [
+      "full",
+      "core"
+    ],
+    "packages": {
+      "brew": [
+        "ripgrep"
+      ],
+      "apt": [
+        "ripgrep"
+      ],
+      "dnf": [
+        "ripgrep"
+      ]
+    },
+    "command": "rg",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "tree",
+    "profiles": [
+      "full",
+      "core"
+    ],
+    "packages": {
+      "brew": [
+        "tree"
+      ],
+      "apt": [
+        "tree"
+      ],
+      "dnf": [
+        "tree"
+      ]
+    },
+    "command": "tree",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "node",
+    "profiles": [
+      "full",
+      "dev"
+    ],
+    "packages": {
+      "brew": [
+        "node"
+      ],
+      "apt": [
+        "nodejs",
+        "npm"
+      ],
+      "dnf": [
+        "nodejs",
+        "npm"
+      ]
+    },
+    "command": "node",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "python",
+    "profiles": [
+      "full",
+      "dev"
+    ],
+    "packages": {
+      "brew": [
+        "python@3.12"
+      ],
+      "apt": [
+        "python3",
+        "python3-pip",
+        "python3-venv"
+      ],
+      "dnf": [
+        "python3",
+        "python3-pip"
+      ]
+    },
+    "command": "python3",
+    "cask": false,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "bun",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "bun"
+      ]
+    },
+    "command": "bun",
+    "cask": false,
+    "guidance": "Install Bun from https://bun.com/docs/installation . External installers are not executed by this launcher."
+  },
+  {
+    "id": "uv",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "uv"
+      ]
+    },
+    "command": "uv",
+    "cask": false,
+    "guidance": "Install uv from https://docs.astral.sh/uv/getting-started/installation/ . External installers are not executed by this launcher."
+  },
+  {
+    "id": "ollama",
+    "profiles": [
+      "full",
+      "ai"
+    ],
+    "packages": {
+      "brew": [
+        "ollama"
+      ]
+    },
+    "command": "ollama",
+    "cask": false,
+    "guidance": "Install Ollama using its official platform instructions: https://docs.ollama.com/linux . Then rerun doctor/status. No model is downloaded automatically."
+  },
+  {
+    "id": "orbstack",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "orbstack"
+      ]
+    },
+    "command": "",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "tailscale-app",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "tailscale-app"
+      ]
+    },
+    "command": "",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "cursor",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "cursor"
+      ]
+    },
+    "command": "",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "visual-studio-code",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "visual-studio-code"
+      ]
+    },
+    "command": "code",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "ghostty",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "ghostty"
+      ]
+    },
+    "command": "",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "iterm2",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "iterm2"
+      ]
+    },
+    "command": "",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "google-chrome",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "google-chrome"
+      ]
+    },
+    "command": "google-chrome",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "firefox",
+    "profiles": [
+      "full",
+      "desktop"
+    ],
+    "packages": {
+      "brew": [
+        "firefox"
+      ],
+      "apt": [
+        "firefox-esr"
+      ],
+      "dnf": [
+        "firefox"
+      ]
+    },
+    "command": "",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "brave-browser",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "brave-browser"
+      ]
+    },
+    "command": "brave-browser",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "zen",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "zen"
+      ]
+    },
+    "command": "",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "raycast",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "raycast"
+      ]
+    },
+    "command": "",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "betterdisplay",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "betterdisplay"
+      ]
+    },
+    "command": "",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "syncthing",
+    "profiles": [
+      "full",
+      "desktop"
+    ],
+    "packages": {
+      "brew": [
+        "syncthing-app"
+      ],
+      "apt": [
+        "syncthing"
+      ],
+      "dnf": [
+        "syncthing"
+      ]
+    },
+    "command": "syncthing",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "vlc",
+    "profiles": [
+      "full",
+      "desktop"
+    ],
+    "packages": {
+      "brew": [
+        "vlc"
+      ],
+      "apt": [
+        "vlc"
+      ],
+      "dnf": [
+        "vlc"
+      ]
+    },
+    "command": "",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "appcleaner",
+    "profiles": [
+      "full"
+    ],
+    "packages": {
+      "brew": [
+        "appcleaner"
+      ]
+    },
+    "command": "",
+    "cask": true,
+    "guidance": "No automatic Linux installation is provided for this optional application. Check its official installation documentation."
+  },
+  {
+    "id": "claude",
+    "profiles": [],
+    "packages": {},
+    "command": "claude",
+    "guidance": "Install Claude Code using https://code.claude.com/docs/en/setup . Authentication is separate from tool installation."
+  }
+]
