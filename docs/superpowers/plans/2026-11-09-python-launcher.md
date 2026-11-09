@@ -71,8 +71,8 @@ Unsupported and malformed platform identity must fail before mutation (Task 1). 
 
 **Files:** `README.md`, `docs/LINUX.md`, `docs/MACOS.md`, `docs/TROUBLESHOOTING.md`, `docs/AUDIT.md`, `assets/banner.svg`, `assets/workflow.svg`.
 
-- [ ] Document exact profiles, tool availability, Python/package prerequisites, commands, explicit tuning, restore boundaries, and migration from the old daemon. Mark Windows deferred and optional external installers as manual prerequisites.
-- [ ] Retain the custom visual layout while updating the banner/workflow for one launcher and multiple platforms. Update the audit with test evidence and unresolved native validation limits.
-- [ ] Run all tests, Python compilation, shell syntax, whitespace checks, catalog parity, documentation links, graphic validation, and desktop/mobile README previews.
-- [ ] Obtain one fresh whole-branch review against the approved spec. Fix important findings with reproducing tests; rerun the affected suite.
-- [ ] Commit, publish to main, verify remote file hashes and CI results, and report exact support and validation limits.
+- [x] Document exact profiles, tool availability, Python/package prerequisites, commands, explicit tuning, restore boundaries, and migration from the old daemon. Mark Windows deferred and optional external installers as manual prerequisites.
+- [x] Retain the custom visual layout while updating the banner/workflow for one launcher and multiple platforms. Update the audit with test evidence and unresolved native validation limits.
+- [x] Run all tests, Python compilation, shell syntax, whitespace checks, catalog parity, documentation links, graphic validation, and desktop/mobile README previews.
+- [x] Obtain one fresh whole-branch review against the approved spec. Fix important findings with reproducing tests; rerun the affected suite.
+- [x] Commit, publish to main, verify remote file hashes and CI results, and report exact support and validation limits.

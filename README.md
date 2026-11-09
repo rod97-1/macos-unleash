@@ -41,7 +41,7 @@ You need Python 3.10 or newer and your platform's package manager. The launcher 
 | Ubuntu | APT | Core/dev installation and repeat runs tested on Ubuntu 24.04 x86_64. |
 | Debian | APT | Core/dev installation and repeat runs tested on Debian 13 x86_64. |
 | Fedora | DNF | Core/dev installation and repeat runs tested on Fedora 44 x86_64. |
-| Apple Silicon macOS | Homebrew | Adapter and recovery unit tests; native tuning needs verification on a Mac. |
+| Apple Silicon macOS | Homebrew | Unit suite and native read-only doctor/plan checks pass in CI; physical tuning still needs verification. |
 | Windows | Not implemented | Planned after Linux; the launcher rejects Windows without changes. |
 
 Linux detection accepts x86_64 and arm64. The native package integration checks currently cover x86_64. See [Linux prerequisites](docs/LINUX.md) or [Mac prerequisites and migration](docs/MACOS.md).

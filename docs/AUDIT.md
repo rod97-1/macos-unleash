@@ -28,9 +28,12 @@ The original Mac tool collection remains in Brewfile. A parity test checks its 3
 | Debian 13 x86_64 container | Same native package checks passed. |
 | Fedora 44 x86_64 container | Same checks passed after fixing virtual-provider handling for package names such as wget. |
 | Cloud Debian host | Read-only doctor and plan work. Status accurately reports native selected packages that are missing. No system tuning was applied. |
+| Apple Silicon macOS CI | Python 3.12 unit suite and native read-only doctor/plan smoke checks passed. No system tuning was applied. |
 | Mac and Linux desktop adapters | Exercised with command fixtures and temporary recovery state. No claim of native desktop, power, or GPU validation. |
 
 The container bootstrap preserves repository signatures and TLS verification, using the cloud CA bundle where required. Package installations were confined to disposable containers. These results do not measure workstation performance.
+
+The [pre-publication CI run](https://github.com/rod97-1/macos-unleash/actions/runs/42659206741) passed all six jobs, including Python 3.10/3.13 on Ubuntu, Python 3.12 on Apple Silicon macOS, and all three Linux package integration targets. CI uses `macos-latest` because the older macOS 14 runner configuration was unavailable.
 
 Independent review identified two recovery defects before publication: a failed re-apply could lose the preceding managed value, and generic journal scalars could reach setting writers without type checks. Regression tests reproduced both. The journal now records pending writes and their preceding values; handler-specific validation runs before any restore write, with validation also enforced by the writers. The full suite passed after both corrections.
 
