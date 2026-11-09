@@ -16,6 +16,35 @@ class SettingsError(RuntimeError):
     pass
 
 
+def _scalar(value):
+    if value is not None and (
+        type(value) not in (bool, int, float, str)
+        or (type(value) is float and not math.isfinite(value))
+    ):
+        raise SettingsError("Invalid scalar setting snapshot.")
+
+
+def _boolean(value):
+    if type(value) is not bool:
+        raise SettingsError("Setting snapshot must be boolean.")
+
+
+def _integer(value, maximum=2**31 - 1):
+    if type(value) is not int or not 0 <= value <= maximum:
+        raise SettingsError(
+            "Setting snapshot must be an integer within supported bounds."
+        )
+
+
+def _profile(value):
+    if type(value) is not str or value not in (
+        "balanced",
+        "performance",
+        "power-saver",
+    ):
+        raise SettingsError("Invalid power profile snapshot.")
+
+
 @dataclass
 class Setting:
     id: str
@@ -23,6 +52,16 @@ class Setting:
     read: Callable
     write: Callable
     desired: object
+    validate: Callable = _scalar
+
+    def __post_init__(self):
+        writer = self.write
+
+        def checked_write(value):
+            self.validate(value)
+            return writer(value)
+
+        self.write = checked_write
 
 
 def _require(runner, *commands):
@@ -110,6 +149,7 @@ def _linux(runner, groups):
                 read_animation,
                 write_animation,
                 False,
+                _boolean,
             )
         )
     if "power" in groups:
@@ -138,6 +178,7 @@ def _linux(runner, groups):
                 read_power,
                 write_power,
                 "performance",
+                _profile,
             )
         )
     return settings
@@ -199,6 +240,7 @@ def _mac(runner, groups, gpu_limit_mb):
                         _privileged(runner, ["pmset", "-c", key, str(value)])
                     ),
                     desired,
+                    _integer,
                 )
             )
     if "services" in groups:
@@ -234,6 +276,7 @@ def _mac(runner, groups, gpu_limit_mb):
                         )
                     ),
                     True,
+                    _boolean,
                 )
             )
         settings.append(
@@ -268,6 +311,7 @@ def _mac(runner, groups, gpu_limit_mb):
                         )
                     ),
                     False,
+                    _boolean,
                 )
             )
     if gpu_limit_mb is not None:
@@ -306,6 +350,7 @@ def _mac(runner, groups, gpu_limit_mb):
                     )
                 ),
                 gpu_limit_mb,
+                lambda value: _integer(value, total_mb),
             )
         )
     return settings

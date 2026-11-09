@@ -91,12 +91,14 @@ class StateStore:
             if (
                 not re.fullmatch(r"[a-z][a-z0-9_.-]{0,100}", sid)
                 or not isinstance(entry, dict)
-                or set(entry) != {"before", "after", "run"}
+                or set(entry) != {"before", "after", "previous", "pending", "run"}
             ):
                 raise StateError("Invalid setting record.")
             if (
                 not _scalar(entry["before"])
                 or not _scalar(entry["after"])
+                or not _scalar(entry["previous"])
+                or type(entry["pending"]) is not bool
                 or entry["run"] not in runs
                 or sid not in runs[entry["run"]]
             ):
@@ -162,19 +164,45 @@ class StateStore:
             if os.path.exists(name):
                 os.unlink(name)
 
+    @staticmethod
+    def _validate_value(setting, value):
+        try:
+            setting.validate(value)
+        except (ValueError, TypeError, RuntimeError) as exc:
+            raise StateError(
+                f"Invalid setting snapshot for {setting.id}: {exc}"
+            ) from exc
+
+    def _check_entry(self, setting, entry, current):
+        for key in ("before", "after", "previous"):
+            self._validate_value(setting, entry[key])
+        accepted = (entry["before"], entry["after"])
+        if entry["pending"]:
+            accepted += (entry["previous"],)
+        if current not in accepted:
+            raise StateError(
+                f"Setting conflict: {setting.id} changed outside this launcher."
+            )
+
+    def check(self, settings, data=None):
+        """Read-only validation, also used before package installation."""
+        data = self.load() if data is None else data
+        pending = []
+        for setting in settings:
+            current = setting.read()
+            self._validate_value(setting, current)
+            self._validate_value(setting, setting.desired)
+            entry = data["settings"].get(setting.id)
+            if entry:
+                self._check_entry(setting, entry, current)
+            if current != setting.desired:
+                pending.append((setting, current))
+        return pending
+
     def apply(self, settings):
         with self.locked():
             data = self.load()
-            pending = []
-            for setting in settings:
-                current = setting.read()
-                entry = data["settings"].get(setting.id)
-                if entry and current != entry["after"] and current != entry["before"]:
-                    raise StateError(
-                        f"Setting conflict: {setting.id} changed outside this launcher."
-                    )
-                if current != setting.desired:
-                    pending.append((setting, current))
+            pending = self.check(settings, data)
             if not pending:
                 return None
             run_id = (
@@ -193,6 +221,8 @@ class StateStore:
                 data["settings"][setting.id] = {
                     "before": original,
                     "after": setting.desired,
+                    "previous": current,
+                    "pending": True,
                     "run": run_id,
                 }
                 self._save(data)  # Persist the original before attempting the write.
@@ -201,6 +231,8 @@ class StateStore:
                     raise StateError(
                         f"Setting verification failed: {setting.id}; recovery journal retained."
                     )
+                data["settings"][setting.id]["pending"] = False
+                self._save(data)
             return run_id
 
     def restore(self, settings_by_id, run_id=None):
@@ -229,10 +261,8 @@ class StateStore:
                     raise StateError(f"Unknown setting handler: {sid}")
                 setting = settings_by_id[sid]
                 current = setting.read()
-                if current != entry["after"] and current != entry["before"]:
-                    raise StateError(
-                        f"Restore conflict: {sid} changed outside this launcher."
-                    )
+                self._validate_value(setting, current)
+                self._check_entry(setting, entry, current)
                 pending.append((setting, entry, current))
             for setting, entry, current in reversed(pending):
                 if setting.read() != current:

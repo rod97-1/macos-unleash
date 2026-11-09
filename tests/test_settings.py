@@ -209,3 +209,21 @@ class SettingsTests(unittest.TestCase):
             ],
             runner.calls,
         )
+
+    @patch("unleashlib.settings.os.geteuid", return_value=1000)
+    @patch("unleashlib.settings.Path.exists", return_value=False)
+    def test_wireless_writer_rejects_invalid_snapshot_without_mutation(self, *_):
+        runner = FakeRunner(
+            {
+                ("ifconfig", "awdl0"): (0, "awdl0: flags=8863<UP,RUNNING>"),
+                ("ifconfig", "llw0"): (0, "llw0: flags=8863<UP,RUNNING>"),
+            },
+            available={"ifconfig", "sudo"},
+        )
+        setting = build_settings(
+            Platform("macos", "brew", "arm64"), runner, ["wireless"], None
+        )[0]
+        count = len(runner.calls)
+        with self.assertRaises(SettingsError):
+            setting.write(None)
+        self.assertEqual(len(runner.calls), count)

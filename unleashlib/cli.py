@@ -205,13 +205,7 @@ def main(argv=None):
             )
         # Validate journal context and conflicts before installing any packages.
         if settings:
-            data = store.load()
-            for setting in settings:
-                entry = data["settings"].get(setting.id)
-                if entry and setting.read() not in (entry["before"], entry["after"]):
-                    raise StateError(
-                        f"Setting conflict: {setting.id} changed outside this launcher."
-                    )
+            store.check(settings)
         installed = manager.install(tools)
         print(
             f"Installed and verified {len(installed)} tool(s); {len(tools) - len(installed)} already present."

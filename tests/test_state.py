@@ -149,3 +149,61 @@ class StateTests(unittest.TestCase):
         with self.store.locked():
             with self.assertRaisesRegex(StateError, "lock"):
                 self.store.apply([self.setting])
+
+    def test_failed_reapply_can_restore_original_baseline(self):
+        self.value["example"] = 8000
+        self.setting.desired = 10000
+        self.store.apply([self.setting])
+        self.setting.desired = 11000
+        original_write = self.setting.write
+
+        def fail(value):
+            raise RuntimeError("permission denied")
+
+        self.setting.write = fail
+        with self.assertRaises(RuntimeError):
+            self.store.apply([self.setting])
+        self.setting.write = original_write
+        self.store.restore({"example": self.setting})
+        self.assertEqual(self.value["example"], 8000)
+
+    def test_failed_reapply_can_retry_without_losing_baseline(self):
+        self.value["example"] = 8000
+        self.setting.desired = 10000
+        self.store.apply([self.setting])
+        self.setting.desired = 11000
+        original_write = self.setting.write
+        self.setting.write = lambda value: (_ for _ in ()).throw(
+            RuntimeError("permission denied")
+        )
+        with self.assertRaises(RuntimeError):
+            self.store.apply([self.setting])
+        self.setting.write = original_write
+        self.store.apply([self.setting])
+        self.assertEqual(self.value["example"], 11000)
+        self.store.restore({"example": self.setting})
+        self.assertEqual(self.value["example"], 8000)
+
+    def test_setting_specific_validation_happens_before_any_restore_write(self):
+        def boolean(value):
+            if type(value) is not bool:
+                raise ValueError("boolean required")
+
+        boolean_setting = Setting(
+            "boolean",
+            "Boolean",
+            lambda: self.value.get("boolean", True),
+            lambda value: self.value.__setitem__("boolean", value),
+            False,
+            boolean,
+        )
+        run = self.store.apply([self.setting, boolean_setting])
+        data = self.store.load()
+        data["settings"]["boolean"]["before"] = None
+        (self.path / "state.json").write_text(json.dumps(data))
+        with self.assertRaisesRegex(StateError, "snapshot"):
+            self.store.restore(
+                {"example": self.setting, "boolean": boolean_setting}, run
+            )
+        self.assertIs(self.value["example"], False)
+        self.assertIs(self.value["boolean"], False)
